@@ -1,8 +1,7 @@
-import React from "react"
+import React from "react";
 
-const UserTable = ({users}) => {
-
-    console.log(users)
+const UserTable = ({ users, deleteUser }) => {
+  console.log(users);
   return (
     <table>
       <thead>
@@ -13,27 +12,27 @@ const UserTable = ({users}) => {
         </tr>
       </thead>
       <tbody>
-
-        {
-            users.length > 0 ?
-
-            users.map( user => (
-                <tr key={user.id}>
-                    <td>{user.name}</td>
-                    <td>{user.username}</td>
-                    <td>
-                        <button className="button muted-button">Edit</button>
-                        <button className="button muted-button">Delete</button>
-                    </td>
-                </tr>
-            )) : (
-                <tr>
-                    <td colSpan={3}>No users</td>
-                </tr>
-            )
-        }
-
-        
+        {users.length > 0 ? (
+          users.map((user) => (
+            <tr key={user.id}>
+              <td>{user.name}</td>
+              <td>{user.username}</td>
+              <td>
+                <button className="button muted-button">Edit</button>
+                <button 
+                  className="button muted-button"
+                  onClick={() => {
+                    deleteUser(user.id)
+                  }}>Delete
+                </button>
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan={3}>No users</td>
+          </tr>
+        )}
       </tbody>
     </table>
   );
